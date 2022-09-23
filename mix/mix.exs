@@ -1,40 +1,74 @@
-defmodule Keshikimi2.MixProject do
+defmodule Geolix.Plug.MixProject do
   use Mix.Project
+
+  @url_changelog "https://hexdocs.pm/geolix_plug/changelog.html"
+  @url_github "https://github.com/elixir-geolix/plug"
+  @version "0.3.0-dev"
 
   def project do
     [
-      app: :keshikimi2,
-      version: "0.1.0",
-      elixir: "~> 1.7",
-      start_permanent: Mix.env() == :prod,
+      app: :geolix_plug,
+      name: "Geolix Plug",
+      version: @version,
+      elixir: "~> 1.9",
       deps: deps(),
-      aliases: aliases()
-    ]
-  end
-
-  def application do
-    [
-      extra_applications: [:logger],
-      mod: {Keshikimi2.Application, [Default]}
+      description: "Geolix Plug",
+      dialyzer: dialyzer(),
+      docs: docs(),
+      package: package(),
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test
+      ],
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
   defp deps do
     [
-      {:cachex, "~> 3.1"},
-      {:deps_ghq_get, "~> 0.1.2", only: :dev},
-      {:floki, "~> 0.20.0"},
-      {:httpoison, "~> 1.4"},
-      {:httpoison_form_data, "~> 0.1.3"},
-      {:poison, "~> 3.1"},
-      {:timex, "~> 3.1"},
-      {:yaml_elixir, "~> 2.1.0"}
+      {:credo, "~> 1.6", only: :dev, runtime: false},
+      {:dialyxir, "~> 1.2", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
+      {:excoveralls, "~> 0.14.0", only: :test},
+      {:geolix, "~> 2.0"},
+      {:plug, "~> 1.0"}
     ]
   end
 
-  defp aliases do
+  defp dialyzer do
     [
-      "deps.get": ["deps.get", "deps.ghq_get --async"]
+      flags: [
+        :error_handling,
+        :underspecs,
+        :unmatched_returns
+      ],
+      plt_core_path: "plts",
+      plt_local_path: "plts"
+    ]
+  end
+
+  defp docs do
+    [
+      extras: [
+        "CHANGELOG.md",
+        LICENSE: [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      main: "Geolix.Plug",
+      source_ref: "v#{@version}",
+      source_url: @url_github,
+      formatters: ["html"]
+    ]
+  end
+
+  defp package do
+    [
+      files: ["CHANGELOG.md", "LICENSE", "mix.exs", "README.md", "lib"],
+      licenses: ["Apache-2.0"],
+      links: %{
+        "Changelog" => @url_changelog,
+        "GitHub" => @url_github
+      }
     ]
   end
 end
