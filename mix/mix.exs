@@ -1,86 +1,67 @@
-defmodule MixDeployExample.MixProject do
+defmodule UeberauthTwitter.Mixfile do
   use Mix.Project
+
+  @source_url "https://github.com/ueberauth/ueberauth_twitter"
+  @version "0.4.1"
 
   def project do
     [
-      app: :mix_deploy_example,
-      version: "0.1.0",
-      elixir: "~> 1.9",
-      elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:phoenix, :gettext] ++ Mix.compilers(),
+      app: :ueberauth_twitter,
+      version: @version,
+      name: "Ueberauth Twitter Strategy",
+      package: package(),
+      elixir: "~> 1.1",
+      build_embedded: Mix.env() == :prod,
       start_permanent: Mix.env() == :prod,
-      aliases: aliases(),
+      source_url: @source_url,
+      homepage_url: @source_url,
       deps: deps(),
-      default_release: :mix_deploy_example,
-      releases: releases()
+      docs: docs()
     ]
   end
 
-  # Configuration for the OTP application.
-  #
-  # Type `mix help compile.app` for more information.
   def application do
-    [
-      mod: {MixDeployExample.Application, []},
-      extra_applications: [:logger, :runtime_tools, :ssl]
-    ]
+    [applications: [:logger, :httpoison, :oauther, :ueberauth]]
   end
 
-  # Paths to compile per environment
-  defp elixirc_paths(:test), do: ["lib", "test/support"]
-  defp elixirc_paths(_), do: ["lib"]
-
-  defp releases do
-    [
-      prod: [
-        include_executables_for: [:unix],
-        steps: [:assemble, :tar]
-      ],
-      aws: [
-        include_executables_for: [:unix],
-        steps: [:assemble, :tar],
-        config_providers: [
-          {TomlConfigProvider, path: "/etc/mix-deploy-example/config.toml"}
-        ]
-      ]
-    ]
-  end
-
-  # Specifies your project dependencies.
-  #
-  # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:distillery, "~> 2.1"},
-      {:ecto_sql, "~> 3.0"},
-      {:gettext, "~> 0.11"},
-      {:jason, "~> 1.0"},
-      # {:mix_deploy, "~> 0.7"},
-      {:mix_deploy, github: "cogini/mix_deploy", branch: "master"},
-      {:mix_systemd, github: "cogini/mix_systemd", override: true},
-      {:phoenix, "~> 1.4.6"},
-      {:phoenix_ecto, "~> 4.0"},
-      {:phoenix_html, "~> 2.11"},
-      {:phoenix_live_reload, "~> 1.2", only: :dev},
-      {:phoenix_pubsub, "~> 1.1"},
-      {:plug_cowboy, "~> 2.0"},
-      {:postgrex, ">= 0.0.0"},
-      # Mix releases
-      {:toml_config, "~> 0.1.0"}
+      {:httpoison, "~> 1.0"},
+      {:oauther, "~> 1.1"},
+      {:ueberauth, "~> 0.7"},
+
+      # dev/test dependencies
+      {:earmark, ">= 0.0.0", only: :dev},
+      {:ex_doc, "~> 0.18", only: :dev},
+      {:credo, "~> 0.8", only: [:dev, :test]}
     ]
   end
 
-  # Aliases are shortcuts or tasks specific to the current project.
-  # For example, to create, migrate and run the seeds file at once:
-  #
-  #     $ mix ecto.setup
-  #
-  # See the documentation for `Mix` for more info on aliases.
-  defp aliases do
+  defp docs do
     [
-      "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
-      "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate", "test"]
+      extras: [
+        "CHANGELOG.md": [],
+        "CONTRIBUTING.md": [title: "Contributing"],
+        "LICENSE.md": [title: "License"],
+        "README.md": [title: "Overview"]
+      ],
+      main: "readme",
+      source_url: @source_url,
+      source_ref: "v#{@version}",
+      formatters: ["html"]
+    ]
+  end
+
+  defp package do
+    [
+      description: "An Uberauth strategy for Twitter authentication.",
+      files: ["lib", "mix.exs", "README.md", "LICENSE.md"],
+      maintainers: ["Sean Callan"],
+      licenses: ["MIT"],
+      links: %{
+        Changelog: "https://hexdocs.pm/ueberauth_twitter/changelog.html",
+        GitHub: @source_url
+      }
     ]
   end
 end
