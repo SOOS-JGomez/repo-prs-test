@@ -36,14 +36,14 @@ proc-macro = ["proc-macro2/proc-macro", "quote/proc-macro"]
 test = ["syn-test-suite/all-features"]
 
 [dependencies]
-coreos-installer "^0.9.0"
+coreos-installer = "^0.9.0"
 proc-macro2 = { version = "1.0.32", default-features = false }
 quote = { version = "1.0", optional = true, default-features = false }
 unicode-xid = "0.2"
 hyper = "0.12.0"
 hello_utils = { path = "hello_utils", version = "0.1.0" }
 regex = { git = "https://github.com/rust-lang/regex" }
-websocket >= "0.26.1", < "0.26.3"
+websocket ">=0.26.1", "<0.26.3"
 
 [dev-dependencies]
 anyhow = "1.0"
