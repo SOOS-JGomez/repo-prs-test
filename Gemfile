@@ -30,7 +30,7 @@ gem "mongo"
 gem "bson_ext"
 
 # adgear-reporting requires <= 1.2.9
-gem "json", "2.3.0"
+gem "json", "~> 1.2.0", "<= 1.2.9"
 gem "mini_magick"
 
 gem "pg", "~> 0.9.0"
