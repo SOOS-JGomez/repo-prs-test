@@ -43,7 +43,7 @@ unicode-xid = "0.2"
 hyper = "0.12.0"
 hello_utils = { path = "hello_utils", version = "0.1.0" }
 regex = { git = "https://github.com/rust-lang/regex" }
-websocket = { version = "0.26.5" }
+websocket = ">=0.26.1, <0.26.3"
 
 [dev-dependencies]
 anyhow = "1.0"
