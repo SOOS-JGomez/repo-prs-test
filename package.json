@@ -99,6 +99,7 @@
     "jszip": "^3.5.0",
     "readable-stream": "^3.6.0",
     "saxes": "^5.0.1",
+    "shell-quote": "1.6.1",
     "tmp": "^0.2.0",
     "unzipper": "^0.10.11",
     "uuid": "^8.3.0"
