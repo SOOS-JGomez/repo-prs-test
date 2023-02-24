@@ -1,94 +1,57 @@
-source :gemcutter
-source "http://gems.github.com/"
+source 'https://rubygems.org'
 
-gem "rails", :git => "git://github.com/bloom/rails.git", :ref => "adgear-next"
+ruby '2.6.5'
 
-gem "will_paginate"
-gem "aasm"
-gem "treetop"
-gem "escape"
-gem "mime-types"
-gem "spreadsheet"
-gem "lockfile"
-gem "uuid"
-gem "hpricot"
-gem "hoptoad_notifier"
-gem "rest-client", :require => "rest_client"
-gem "active_url", :git => "git://github.com/francois/active_url", :ref => "e4831dad515dcc21608eecdc3eceeeac0b24446c"
-gem "redis"
-gem "tokyocabinet"
-gem "msgpack"
-gem "broach"
+gem 'rails',            '5.1.6'
 
-# Required by Redis to prevent connection hangs when the remote host is unavailable
-platforms :ruby_18 do
-  gem "SystemTimer"
+gem 'activeadmin',      '~> 1.2.1'
+gem 'bundler',          '>= 1.17.1'
+gem 'carrierwave',      '~> 1.3.2'
+gem 'chartkick',        '~> 3.4.0'
+gem 'cloudinary',       '~> 1.9.1'
+gem 'config',           '~> 1.7.0'
+gem 'figaro',           '~> 1.1.1'
+gem 'file_validators',  '~> 2.0.2'
+gem 'foreman',          '~> 0.78.0'
+gem 'friendly_id',      '~> 5.1.0'
+gem 'gems',             '~> 0.8.3'
+gem 'high_voltage',     '~> 3.0.0'
+gem 'mechanize',        '~> 2.7.7'
+gem 'octokit',          '~> 4.1.1'
+gem 'pg',               '~> 0.18.3'
+gem 'puma',             '~> 4.3.12'
+gem 'redis',            '~> 3.2.1'
+gem 'reform',           '~> 2.0.5'
+gem 'rollbar',          '~> 2.12.0'
+gem 'sidekiq',          '>= 4.2.10'
+gem 'sidekiq-failures', '~> 0.4.5'
+gem 'simple_form',      '~> 5.0.0'
+gem 'slim',             '~> 3.0.6'
+gem 'valid_email',      '~> 0.0.11'
+gem 'validate_url',     '~> 1.0.2'
+
+# Assets gems
+source 'https://rails-assets.org' do
+  gem 'rails-assets-clipboard',   '1.5.3'
+  gem 'rails-assets-headroom.js', '0.7.0'
+  gem 'rails-assets-jquery',      '2.1.4'
+  gem 'rails-assets-jquery-ujs',  '1.1.0'
 end
 
-# When accessing adgear-reporting through the local lib method, we need this
-gem "mongo"
-gem "bson_ext"
-
-# adgear-reporting requires <= 1.2.9
-gem "json", "~> 1.2.0", "<= 1.2.9"
-gem "mini_magick"
-
-gem "pg", "~> 0.9.0"
-
-platforms :ruby_18 do
-  # Ruby's 1.9 stdlib replaced CSV with the implementation of 1.8's FasterCSV, but
-  # the upgrade path is problematic: we have to change how we're loading the library.
-  gem "fastercsv"
-end
+gem 'autoprefixer-rails',   '~> 6.6.0'
+gem 'materialize-sass',     '~> 0.97.5'
+gem 'sass-rails',           '~> 5.0.6'
+gem 'uglifier',             '~> 2.7.2'
 
 group :development do
-  platforms :ruby_18 do
-    gem "ruby-debug"
-
-    # Generates continuous testing metrics
-    gem "metric_fu"
-  end
-
-  # Only one of these is required, but for dependency resolution
-  # to work correctly, both have to be specified
-  gem "thin"
-  gem "unicorn"
-
-  # Only required to build adgear.js
-  gem "sprockets"
-
-  gem "capistrano"
+  gem 'better_errors',      '~> 2.8.0'
+  gem 'bundler-audit',      '>= 0.5.0', require: false
+  gem 'pry',                '~> 0.10.3'
+  gem 'pry-byebug',         '~> 3.3.0'
+  gem 'pry-remote',         '~> 0.1.8'
+  gem 'pry-stack_explorer', '~> 0.4.9'
 end
 
-group :production, :stw_production, :stw_staging, :staging, :atex_production, :wd_production, :cossette_production do
-  gem "thin"
+group :production do
+  gem 'rails_12factor'
 end
-
-group :test do
-  gem "shoulda", "~> 2.10.3"
-  gem "ruby-debug", "~> 0.10.6"
-  gem "mocha"
-  gem "timecop"
-  gem "factory_girl"
-  gem "parallel"
-  platforms :ruby_18 do
-    gem "leftright", :require => false
-    gem "ruby-debug"
-  end
-end
-
-group :cucumber do
-  gem "timecop"
-  gem "cucumber-rails", :require => false
-  gem "safariwatir",    :require => false, :git => "git://github.com/francois/safariwatir.git"
-  gem "rb-appscript",   :require => false
-  gem "commonwatir",    :require => false
-  gem "rspec",          :require => false
-
-  # Only one of these is required, but for dependency resolution
-  # to work correctly, both have to be specified
-  gem "thin"
-  gem "unicorn"
-end
-
-# vim: filetype=ruby
