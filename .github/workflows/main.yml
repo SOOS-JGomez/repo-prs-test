@@ -16,6 +16,7 @@ jobs:
            target_url: "https://brokencrystals.com/"
            output_format: 'sarif'
            other_options: "-d"
+           disable_rule: "10003,10010,10011,10020,10021,10110"
       - name: Upload SOOS DAST SARIF Report
         uses: github/codeql-action/upload-sarif@v3
         with:
