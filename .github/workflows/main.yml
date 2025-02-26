@@ -12,6 +12,7 @@ jobs:
     name: SOOS SCA Analysis
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@master
       - name: Run SOOS SCA Analysis
         uses: soos-io/soos-sca-github-action@v2
         with:
