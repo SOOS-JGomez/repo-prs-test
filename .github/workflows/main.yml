@@ -2,7 +2,7 @@ name: "SOOS DAST Scan"
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dast" ]
 
 jobs:
   soos:
