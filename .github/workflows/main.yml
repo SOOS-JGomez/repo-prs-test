@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Run SOOS DAST Analysis
-        uses: soos-io/soos-dast-github-action@a7eb40b94c1c81eb76b178ba1befdc21823f86fa
+        uses: soos-io/soos-dast-github-action@v2
         with:
           image_tag: 'beta'
           client_id: ${{ secrets.SOOS_CLIENT_ID }}
