@@ -45,6 +45,7 @@ jobs:
       - name: Run SOOS SCA Analysis
         uses: soos-io/soos-csa-github-action@v1
         with:
+          image_tag: 'beta'
           client_id: ${{ secrets.SOOS_CLIENT_ID }}
           api_key: ${{ secrets.SOOS_API_KEY }}
           api_url: "https://qa-api.soos.io/api/"
