@@ -24,6 +24,11 @@ jobs:
           target_url: "https://www.example.com/"
           export_format: "Sarif"
           export_file_type: "Json"
+          disabled_rules: "10020,10021,10035,10038,10063"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'reports'
+          path: '*'
       - name: Find and rename SARIF file since it is unique
         run: |
           file=$(find . -name "*.sarif.json" | head -n 1)
