@@ -24,7 +24,8 @@ jobs:
           target_url: "https://www.example.com/"
           export_format: "Sarif"
           export_file_type: "Json"
-          disabled_rules: "10020,10021,10035,10038,10063"
+          disable_rules: "10020,10021,10035,10038,10063"
+          other_options: "-d"
       - uses: actions/upload-artifact@v4
         with:
           name: 'reports'
