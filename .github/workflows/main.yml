@@ -5,12 +5,13 @@ on:
     branches: [ "master" ]
 
 jobs:
-  soos:
+  soos-sca:
     permissions:
       security-events: write # for uploading code scanning alert info
       actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
     name: SOOS SCA Analysis
     runs-on: ubuntu-latest
+    if: ${{ 'A' == 'B' }}
     steps:
       - uses: actions/checkout@master
       - name: Run SOOS SCA Analysis
@@ -28,7 +29,36 @@ jobs:
           path: '*'
       - name: Rename file 
         run: mv *.sarif.json results.sarif
-      - name: Upload SOOS DAST SARIF Report
+      - name: Upload SOOS SCA SARIF Report
+        uses: github/codeql-action/upload-sarif@v3
+        with:
+          sarif_file: results.sarif
+          
+  soos-csa:
+    permissions:
+      security-events: write # for uploading code scanning alert info
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    name: SOOS CSA Analysis
+    runs-on: ubuntu-latest
+    if: ${{ 'A' == 'A' }}
+    steps:
+      - name: Run SOOS SCA Analysis
+        uses: soos-io/soos-csa-github-action@v1
+        with:
+          client_id: ${{ secrets.SOOS_CLIENT_ID }}
+          api_key: ${{ secrets.SOOS_API_KEY }}
+          api_url: "https://qa-api.soos.io/api/"
+          project_name: "csa_gha_test"
+          target_image: "ericallard/elasticsearch:x86"
+          export_format: "sarif"
+          export_file_type: "json"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: 'reports'
+          path: '*'
+      - name: Rename file 
+        run: mv *.sarif.json results.sarif
+      - name: Upload SOOS CSA SARIF Report
         uses: github/codeql-action/upload-sarif@v3
         with:
           sarif_file: results.sarif
