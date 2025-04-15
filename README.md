@@ -1,2 +1,2 @@
 # repo-prs-test
-WH test 1
+WH test 2
