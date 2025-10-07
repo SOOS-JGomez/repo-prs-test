@@ -1,2 +1,2 @@
 # repo-prs-test
-WH not triggered 2
+WH not triggered 1
