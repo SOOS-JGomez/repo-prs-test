@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 ruby '2.6.5'
 
-gem 'rails',            '~> 5.1.6'
+gem 'rails',            '8.0.0'
 
 gem 'activeadmin',      '~> 1.2.1'
 gem 'bundler',          '>= 1.17.1'
