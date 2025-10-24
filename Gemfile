@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.6.5'
 
+gem 'rails',            '~> 5.1.6'
+gem 'activeadmin',      '~> 1.2.1'
+
 gem 'bundler',          '>= 1.17.1'
 gem 'carrierwave',      '~> 1.3.2'
 gem 'chartkick',        '~> 3.4.0'
