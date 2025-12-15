@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.6.5'
 
 gem 'rails',            '~> 5.1.6'
-gem 'activeadmin',      '~> 1.2.1'
+gem 'activeadmin',      '3.3.0'
 
 gem 'bundler',          '>= 1.17.1'
 gem 'carrierwave',      '~> 1.3.2'
